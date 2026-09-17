@@ -12,6 +12,7 @@ import {
 } from "../validators/rewards.validator.js";
 
 import { validate } from "../middleware/validate.middleware.js";
+import { authenticate } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
@@ -22,12 +23,14 @@ router.get(
 
 router.post(
     "/earn",
+    authenticate,
     validate(earnSchema),
     earn
 );
 
 router.post(
     "/redeem",
+    authenticate,
     validate(redeemSchema),
     redeem
 );

@@ -21,8 +21,15 @@ export const getTierRules = (lifetimePoints) => {
         };
     }
 
+    if (lifetimePoints < 5000) {
+        return {
+            tier: "Gold",
+            earnRate: 1.5
+        };
+    }
+
     return {
-        tier: "Gold",
-        earnRate: 1.5
+        tier: "Platinum",
+        earnRate: 0.3
     };
 };

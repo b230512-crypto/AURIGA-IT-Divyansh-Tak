@@ -5,18 +5,25 @@ const pointsTransactionSchema = new mongoose.Schema(
         memberId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Member",
-            required: true
+            required: true,
+            index: true
         },
 
         type: {
             type: String,
-            enum: ["EARN", "REDEEM"],
+            enum: ["EARN", "REDEEM", "EXPIRE"],
             required: true
         },
 
         pointsAmount: {
             type: Number,
             required: true
+        },
+
+        remainingPoints: {
+            type: Number,
+            default: 0,
+            min: 0
         },
 
         purchaseAmount: {
@@ -30,6 +37,17 @@ const pointsTransactionSchema = new mongoose.Schema(
             required: true,
             unique: true,
             trim: true
+        },
+
+        expiresAt: {
+            type: Date,
+            default: null,
+            index: true
+        },
+
+        expired: {
+            type: Boolean,
+            default: false
         }
     },
     {
